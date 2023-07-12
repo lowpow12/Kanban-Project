@@ -14,4 +14,5 @@ Route::prefix('tasks')
         Route::get('/', 'index')->name('index');
         Route::get('{id}/edit', 'edit')->name('edit');
         Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
     });
