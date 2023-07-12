@@ -10,17 +10,14 @@
       <label>Name:</label>
       <input class="form-input" type="text" value="" >
     </div>
-
     <div class="form-item">
       <label>Detail:</label>
       <textarea class="form-text-area"></textarea>
     </div>
-
     <div class="form-item">
       <label>Due Date:</label>
       <input class="form-input" type="date" value="" >
     </div>
-
     <div class="form-item">
       <label>Progress:</label>
       <select class="form-input">
