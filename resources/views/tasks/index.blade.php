@@ -24,9 +24,18 @@
     @foreach ($tasks as $index => $task)
       <div class="table-body">
         <div class="table-body-task-name">
-          <span class="material-icons @if ($task->status == 'completed') check-icon-completed @else check-icon @endif" >
-            check_circle
-          </span>
+        @if ($task->status == 'completed')
+      <div class="material-icons task-progress-card-top-checked">check_circle</div>
+    @else
+      <form
+        action="{{ route('tasks.moveToTaskList', ['id' => $task->id, 'status' => 'completed']) }}" 
+        method="POST"
+      >
+        @method('patch')
+        @csrf
+        <button class="material-icons task-progress-card-top-check">check_circle</button>
+      </form>
+    @endif
           {{ $task->name }}
         </div>
         <div class="table-body-detail"> {{ $task->detail }} </div>
