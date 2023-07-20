@@ -7,12 +7,14 @@ Route::get('/', function () {
     return view('home');
 })->name('home'); 
 
+
+
 Route::prefix('tasks')
     ->name('tasks.')
     ->controller(TaskController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
+        Route::get('create/{status?}', 'create')->name('create');
         Route::post('/', 'store')->name('store');
         Route::get('{id}/edit', 'edit')->name('edit');
         Route::put('{id}/edit', 'update')->name('update');
@@ -20,5 +22,5 @@ Route::prefix('tasks')
         Route::delete('{id}/delete', 'destroy')->name('destroy');
         Route::get('progress', 'progress')->name('progress');
         Route::patch('{id}/move', 'move')->name('move');
-        Route::patch('{id}/check', 'moveToTaskList')->name('moveToTaskList');
+        Route::patch('{id}/check', 'moveToTaskList')->name('moveToTaskList');  
     });

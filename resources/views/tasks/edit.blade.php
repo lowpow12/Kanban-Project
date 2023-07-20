@@ -42,7 +42,7 @@
         <option @if(old('status', $task->status) == 'completed') selected @endif value="completed">Completed</option>
         </select>
       </div>
-      <button type="submmit" class="form-button">Submit</button>
+      <button type="submit" class="form-button">Submit</button>
     </form>
   </div>
 @endsection
