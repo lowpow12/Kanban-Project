@@ -22,9 +22,11 @@ class TaskController extends Controller
         return view('tasks.edit', ['pageTitle' => $pageTitle, 'task' => $task]);
     }
 
-    public function create(){
+    public function create($status=null){
         $pageTitle = 'Create Task';
-        return view('tasks.create', ['pageTitle' => $pageTitle]);
+        
+
+    return view('tasks.create', ['pageTitle' => $pageTitle, 'status'=>$status]);
     }
 
     public function store(Request $request)
