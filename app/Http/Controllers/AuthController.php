@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function signupForm()
+    public function signupForm()//
     {
         $pageTitle = 'Signup Page';
     return view('auth.signup_form', ['pageTitle' => $pageTitle]);
     }
 
-    public function signup(Request $request)
+    public function signup(Request $request)//
     {
         $request->validate(
             [
@@ -43,13 +43,13 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
-    public function loginForm()
+    public function loginForm()//
     {
         $pageTitle = 'Login';
         return view('auth.login_form', ['pageTitle' => $pageTitle]);
     }
 
-    public function login(Request $request)
+    public function login(Request $request)//
     {
     $request->validate(
         [
@@ -71,5 +71,11 @@ class AuthController extends Controller
         ->withErrors([
             'email' => 'These credentials do not match our records.',
         ]);
+    }
+
+    public function logout()//
+    {
+    Auth::logout();
+    return redirect()->route('auth.login');
     }
 }
