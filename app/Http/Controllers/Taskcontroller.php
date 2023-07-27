@@ -14,22 +14,15 @@ class TaskController extends Controller
        
     }
 
-    public function edit($id)
+    public function create($status=null)//
     {
-        $pageTitle = 'Edit Task';
-        $task = Task::find($id);
-
-        return view('tasks.edit', ['pageTitle' => $pageTitle, 'task' => $task]);
-    }
-
-    public function create($status=null){
         $pageTitle = 'Create Task';
         
 
     return view('tasks.create', ['pageTitle' => $pageTitle, 'status'=>$status]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request)//
     {
         $request->validate(
             [
@@ -50,7 +43,15 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    public function update(Request $request, $id)
+    public function edit($id)//
+    {
+            $pageTitle = 'Edit Task';
+            $task = Task::find($id);
+
+            return view('tasks.edit', ['pageTitle' => $pageTitle, 'task' => $task]);
+    }
+
+    public function update(Request $request, $id)//
     {
         $task = Task::find($id);
         $task->update([
@@ -64,7 +65,7 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    public function index()
+    public function index()//
     {
         $pageTitle = 'Task List'; 
         $tasks = Task::all();
@@ -74,21 +75,22 @@ class TaskController extends Controller
         ]);
     }
 
-    public function delete($id){
+    public function delete($id)//
+    {
         $pageTitle = 'Delete Task';
         $task = Task::find($id);
 
         return view('tasks.delete', ['pageTitle' => $pageTitle, 'task' => $task]);
     }
 
-    public function destroy($id)
+    public function destroy($id)//
     {
         $task = Task::find($id);
         $task->delete();
         return redirect()->route('tasks.index');
     }
 
-    public function progress()
+    public function progress()//
     {
     $title = 'Task Progress';
 
@@ -119,7 +121,7 @@ class TaskController extends Controller
     ]);
     }
 
-    public function move(int $id, Request $request)
+    public function move(int $id, Request $request)//
     {
     $task = Task::findOrFail($id);
 
@@ -130,7 +132,7 @@ class TaskController extends Controller
     return redirect()->route('tasks.progress');
     }
 
-    public function moveToTaskList(int $id, Request $request)
+    public function moveToTaskList(int $id, Request $request)//
     {
     $task = Task::findOrFail($id);
 
