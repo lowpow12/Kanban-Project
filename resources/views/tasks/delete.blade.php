@@ -4,6 +4,7 @@
 
 @section('main')
   <div class="form-container">
+  <a href="{{ route('tasks.create') }}" class="material-icons task-progress-card-top-edit">cross</a>
     <h1 class="form-title">{{ $pageTitle }}</h1>
     <form
       class="form"
@@ -20,6 +21,7 @@
         >
           Yes, delete it forever
         </button>
+        
     </form>
   </div>
 @endsection

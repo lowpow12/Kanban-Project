@@ -64,7 +64,7 @@ class TaskSeeder extends Seeder
             ],
         ];
 
-        DB::table('tasks')->insert($tasks);
+        \DB::table('tasks')->insert($tasks);
     }
 }
 

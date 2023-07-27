@@ -14,14 +14,6 @@ class TaskController extends Controller
        
     }
 
-    public function edit($id)//
-    {
-        $pageTitle = 'Edit Task';
-        $task = Task::find($id);
-
-        return view('tasks.edit', ['pageTitle' => $pageTitle, 'task' => $task]);
-    }
-
     public function create($status=null)//
     {
         $pageTitle = 'Create Task';
@@ -49,6 +41,14 @@ class TaskController extends Controller
         ]);
 
         return redirect()->route('tasks.index');
+    }
+
+    public function edit($id)//
+    {
+            $pageTitle = 'Edit Task';
+            $task = Task::find($id);
+
+            return view('tasks.edit', ['pageTitle' => $pageTitle, 'task' => $task]);
     }
 
     public function update(Request $request, $id)//
