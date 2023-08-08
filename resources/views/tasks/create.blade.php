@@ -28,6 +28,10 @@
       @enderror
     </div>
 
+    @php
+    $status = old('status', $status);
+    @endphp
+
     <div class="form-item">
       <label>Progress:</label>
       <select class="form-input" name="status">
