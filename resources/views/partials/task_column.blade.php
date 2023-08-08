@@ -12,6 +12,7 @@
         'leftStatus' => $leftStatus,
         'rightStatus' => $rightStatus,
       ])
+    
     @endforeach
   </div>
 </div>

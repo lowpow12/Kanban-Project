@@ -19,6 +19,7 @@
       <div class="task-list-header-detail">Detail</div>
       <div class="task-list-header-due-date">Due Date</div>
       <div class="task-list-header-progress">Progress</div>
+      <div class="task-list-header-progress">Owner</div>
     </div>
 
     @foreach ($tasks as $index => $task)
@@ -55,6 +56,7 @@
               Not Started
           @endswitch
         </div>
+        <div class="table-body-task-name">{{ $task->user->name }}</div>
         <div>
           <a href="{{ route('tasks.edit', ['id' => $task->id]) }}">Edit</a> &nbsp;
           <a href="{{ route('tasks.delete', ['id' => $task->id]) }}">Delete</a>

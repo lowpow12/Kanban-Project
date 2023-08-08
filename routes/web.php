@@ -4,9 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController; 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home')->middleware('auth'); 
+Route::get('/', [TaskController::class, 'home'])
+    ->name('home')
+    ->middleware('auth');
 
 
 
@@ -20,6 +20,7 @@ Route::prefix('tasks')
         Route::post('/', 'store')->name('store');
         Route::get('{id}/edit', 'edit')->name('edit');
         Route::put('{id}/edit', 'update')->name('update');
+        
         Route::get('{id}/delete', 'delete')->name('delete');
         Route::delete('{id}/delete', 'destroy')->name('destroy');
         Route::get('progress', 'progress')->name('progress');
