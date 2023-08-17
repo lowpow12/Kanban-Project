@@ -24,6 +24,7 @@
   <div>
     <p>Owner: <strong>{{ $task->user->name }}</strong></p>
   </div>
+  @can('delete', $task)
   <div class="@if ($leftStatus) task-progress-card-left @else task-progress-card-right @endif">
     @if ($leftStatus)
     <form
@@ -47,4 +48,5 @@
       </form>
     @endif
   </div>
+  @endcan
 </div>
