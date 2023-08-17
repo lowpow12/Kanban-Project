@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,14 +49,19 @@ class TaskController extends Controller
     public function edit($id)//
     {
             $pageTitle = 'Edit Task';
-            $task = Task::find($id);
+            $task = Task::findOrFail($id);
+
+            Gate::authorize('update', $task);
 
             return view('tasks.edit', ['pageTitle' => $pageTitle, 'task' => $task]);
     }
 
     public function update(Request $request, $id)//
     {
-        $task = Task::find($id);
+        $task = Task::findOrFail($id);
+
+        Gate::authorize('update', $task);
+
         $task->update([
             'name' => $request->name,
             'detail' => $request->detail,
@@ -80,14 +86,18 @@ class TaskController extends Controller
     public function delete($id)//
     {
         $pageTitle = 'Delete Task';
-        $task = Task::find($id);
+        $task = Task::findOrFail($id);
+
+        Gate::authorize('delete', $task);
 
         return view('tasks.delete', ['pageTitle' => $pageTitle, 'task' => $task]);
     }
 
     public function destroy($id)//
     {
-        $task = Task::find($id);
+        $task = Task::findOrFail($id);
+        Gate::authorize('delete', $task);
+
         $task->delete();
         return redirect()->route('tasks.index');
     }
@@ -126,6 +136,7 @@ class TaskController extends Controller
     public function move(int $id, Request $request)//
     {
     $task = Task::findOrFail($id);
+    Gate::authorize('complete', $task);
 
     $task->update([
         'status' => $request->status,
@@ -137,6 +148,7 @@ class TaskController extends Controller
     public function moveToTaskList(int $id, Request $request)//
     {
     $task = Task::findOrFail($id);
+    Gate::authorize('complete', $task);
 
     $task->update([
         'status' => $request->status,
@@ -145,7 +157,7 @@ class TaskController extends Controller
     return redirect()->route('tasks.index');
     }
 
-    public function home()
+    public function home()//
     {
         $tasks = Task::where('user_id', auth()->id())->get();
 

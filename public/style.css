@@ -329,3 +329,7 @@ body {
 .task-progress-card-title {
     font-size: 30px;
 }
+
+.table-body-links {
+    width: 10%;
+  }
