@@ -103,7 +103,6 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
 
-
         $role->delete();
         return redirect()->route('roles.index');
     }
