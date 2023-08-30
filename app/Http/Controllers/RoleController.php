@@ -26,6 +26,9 @@ class RoleController extends Controller
     public function create()
     {
         $pageTitle = 'Add Role';
+
+        Gate::authorize('createNewRoles', Role::class);
+        
         $permissions = Permission::all();
         return view('roles.create', [
             'pageTitle' => $pageTitle,
@@ -39,6 +42,8 @@ class RoleController extends Controller
             'name' => ['required'],
             'permissionIds' => ['required'],
         ]);
+
+        Gate::authorize('createAnyRoles', User::class);
 
         DB::beginTransaction();
         try {
