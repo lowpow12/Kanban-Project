@@ -80,7 +80,7 @@ class TaskController extends Controller
     public function index()//
     {
         $pageTitle = 'Task List'; 
-        if (!Gate::allows('viewAnyTask', Task::class)) {
+        if (Gate::allows('viewAnyTask', Task::class)) {
             $tasks = Task::all();
         } else {
             $tasks = Task::where('user_id', Auth::user()->id)->get();

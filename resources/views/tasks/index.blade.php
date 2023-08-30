@@ -25,6 +25,7 @@
     @foreach ($tasks as $index => $task)
       <div class="table-body">
         <div class="table-body-task-name">
+        @canany(['updateAnyTask', 'performAsTaskOwner'], $task)
         @if ($task->status == 'completed')
       <div class="material-icons task-progress-card-top-checked">check_circle</div>
     @else
@@ -37,6 +38,7 @@
         <button class="material-icons task-progress-card-top-check">check_circle</button>
       </form>
     @endif
+    @endcan
           {{ $task->name }}
         </div>
         <div class="table-body-detail"> {{ $task->detail }} </div>
