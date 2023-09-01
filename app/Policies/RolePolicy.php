@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Models\Role;
 use App\Models\Permission;
 
-class RolePolicy
+class RolePolicy extends TaskPolicy
 {
     protected function getUserPermissions($user)//
     {
@@ -76,7 +76,7 @@ class RolePolicy
     {
     $permissions = $this->getUserPermissions($user);
 
-    if ($permissions->contains('view-users-and-role')) {
+    if ($permissions->contains('view-users-and-roles')) {
         return true;
     }
 
