@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TaskFileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TaskController::class, 'home'])
@@ -15,19 +16,28 @@ Route::get('/', [TaskController::class, 'home'])
 Route::prefix('tasks')
     ->name('tasks.')
     ->middleware('auth')
-    ->controller(TaskController::class)
     ->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('create/{status?}', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
-        Route::get('{id}/edit', 'edit')->name('edit');
-        Route::put('{id}/edit', 'update')->name('update');
-        
-        Route::get('{id}/delete', 'delete')->name('delete');
-        Route::delete('{id}/delete', 'destroy')->name('destroy');
-        Route::get('progress', 'progress')->name('progress');
-        Route::patch('{id}/move', 'move')->name('move');
-        Route::patch('{id}/check', 'moveToTaskList')->name('moveToTaskList');  
+        Route::controller(TaskController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create/{status?}', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('{id}/edit', 'edit')->name('edit');
+            Route::put('{id}/edit', 'update')->name('update');
+            
+            Route::get('{id}/delete', 'delete')->name('delete');
+            Route::delete('{id}/delete', 'destroy')->name('destroy');
+            Route::get('progress', 'progress')->name('progress');
+            Route::patch('{id}/move', 'move')->name('move');
+            Route::patch('{id}/check', 'moveToTaskList')->name('moveToTaskList');  
+    });
+    Route::prefix('{task_id}/files')
+            ->name('files.')
+            ->controller(TaskFileController::class)
+            ->group(function () {
+                Route::post('store', 'store')->name('store');
+                Route::get('{id}/show', 'show')->name('show');
+                Route::delete('{id}/destroy', 'destroy')->name('destroy');
+            });
     });
 
 Route::name('auth.')
