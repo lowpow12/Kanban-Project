@@ -54,7 +54,7 @@ class RolePolicy extends TaskPolicy
     {
     $permissions = $this->getUserPermissions($user);
 
-    if ($permissions->contains('update-any-roles')) {
+    if ($permissions->contains('manage-user-roles')) {
         return true;
     }
 
