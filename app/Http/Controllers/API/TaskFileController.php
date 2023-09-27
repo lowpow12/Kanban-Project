@@ -38,7 +38,7 @@ class TaskFileController extends Controller
     
         return response()->json([
             'message' => 'File has been created',
-            'data' => $task->id
+            'data' => $filename
         ], Response::HTTP_OK);
     }
 
